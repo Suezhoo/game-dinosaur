@@ -1,0 +1,8 @@
+$defaultMargin: 20px;
+$bgColor: white;
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

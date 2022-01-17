@@ -1,0 +1,17 @@
+@keyframes jump {
+    0% {
+        top: 150px;
+    }
+    25% {
+        top: 125px;
+    }
+    50% {
+        top: 100px;
+    }
+    75% {
+        top: 125px;
+    }
+    100% {
+        top: 150px;
+    }
+}
