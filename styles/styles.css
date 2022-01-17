@@ -1,36 +1,24 @@
 @-webkit-keyframes jump {
   0% {
-    top: 150px;
-  }
-  25% {
-    top: 125px;
+    top: 250px;
   }
   50% {
-    top: 100px;
-  }
-  75% {
-    top: 125px;
+    top: 75px;
   }
   100% {
-    top: 150px;
+    top: 250px;
   }
 }
 
 @keyframes jump {
   0% {
-    top: 150px;
-  }
-  25% {
-    top: 125px;
+    top: 250px;
   }
   50% {
-    top: 100px;
-  }
-  75% {
-    top: 125px;
+    top: 75px;
   }
   100% {
-    top: 150px;
+    top: 250px;
   }
 }
 
@@ -57,19 +45,36 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: white;
+  background: #202124;
 }
 
 h1 {
   margin: 20px;
-  color: grey;
+  color: lightgrey;
   text-shadow: 0px 1px black;
+}
+
+.scores {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 50px;
+  opacity: 1;
+}
+
+.scores p {
+  margin: 10px;
+  font-size: 2rem;
+  color: lightgrey;
 }
 
 .game {
   width: 600px;
   height: 200px;
-  border: 1px solid black;
+  border: 3px solid black;
   -webkit-transition: 1s;
   transition: 1s;
 }
@@ -77,7 +82,6 @@ h1 {
 .game-fullscreen {
   width: 100vw;
   height: 400px;
-  border: 1px solid black;
   -webkit-transition: 1s;
   transition: 1s;
 }
@@ -93,15 +97,18 @@ h1 {
   width: 100px;
   height: 100px;
   position: relative;
-  top: 300px;
+  top: 250px;
 }
 
 .hide {
   display: none;
+  opacity: 0;
 }
 
 .jump {
-  -webkit-animation: jump 0.5s linear;
-          animation: jump 0.5s linear;
+  -webkit-animation: jump 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+          animation: jump 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 /*# sourceMappingURL=styles.css.map */

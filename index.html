@@ -6,12 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dinosaur - Offline game</title>
         <link rel="stylesheet" href="./styles/styles.css" />
-        <script src="script.js"></script>
     </head>
     <body>
         <div class="game" data-game>
-            <img class="char" src="./assets/img/dino.png" alt="dino" data-char />
+            <div class="scores hide">
+                <p id="high-score" data-high-score>HI 00123</p>
+                <p id="score" data-score>00456</p>
+            </div>
+            <img class="char" id="char" src="./assets/img/dino.png" alt="dino" data-char />
         </div>
-        <h1 data-start-text>Press Space to start...</h1>
+        <h1 data-start-text>Press Space to play...</h1>
     </body>
+    <script src="script.js"></script>
 </html>
