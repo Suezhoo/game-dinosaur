@@ -22,6 +22,24 @@
   }
 }
 
+@-webkit-keyframes move {
+  0% {
+    left: calc(100vw - 65px);
+  }
+  100% {
+    left: -65px;
+  }
+}
+
+@keyframes move {
+  0% {
+    left: calc(100vw - 65px);
+  }
+  100% {
+    left: -65px;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -84,25 +102,43 @@ h1 {
   height: 400px;
   -webkit-transition: 1s;
   transition: 1s;
+  border: 3px solid black;
 }
 
-.char {
+.obstacles img {
+  position: relative;
+  top: 170px;
+  left: calc(100vw - 65px);
+  width: 60px;
+  height: 70px;
+}
+
+.char-box {
   width: 50px;
   height: 50px;
   position: relative;
   top: 150px;
 }
 
-.char-fullscreen {
+.char-box-fullscreen {
   width: 100px;
   height: 100px;
   position: relative;
   top: 250px;
 }
 
+.char {
+  width: 50px;
+  height: 50px;
+}
+
+.char-fullscreen {
+  width: 100px;
+  height: 100px;
+}
+
 .hide {
   display: none;
-  opacity: 0;
 }
 
 .jump {

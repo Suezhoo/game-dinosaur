@@ -9,3 +9,12 @@
         top: 250px;
     }
 }
+
+@keyframes move {
+    0% {
+        left: calc(100vw - 65px);
+    }
+    100% {
+        left: -65px;
+    }
+}
