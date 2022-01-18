@@ -89,6 +89,11 @@ h1 {
   color: lightgrey;
 }
 
+#high-score::before {
+  content: "HI";
+  padding-right: 10px;
+}
+
 .game {
   width: 600px;
   height: 200px;
