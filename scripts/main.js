@@ -18,9 +18,7 @@ window.onload = function () {
     document.addEventListener("keydown", (e) => {
         if (e.code === "Space" && gameRunning == false) {
             gameRunning = true;
-            render(); // Setup the game display
-            runGame(); // Run the game
-            isColliding(); // Check for collision
+            startGame();
         } else if (e.code === "Space" && gameRunning == true && dino.isAlive) {
             dino.state = "jumping";
             jump();
@@ -28,14 +26,13 @@ window.onload = function () {
     });
 };
 
+const backgroudSound = new sound("assets/soundtrack/ome_robert.mp3");
 function render() {
     // Add background sound
-    const backgroudSound = new sound("assets/soundtrack/ome_robert.mp3");
-    backgroudSound.play();
+    backgroudSound.replay();
     // Loop sound after 137seconds (sound duration)
     setInterval(function () {
         backgroudSound.replay();
-        console.log("test");
     }, 137000);
     // Change game to fullscreen
     document.querySelector("[data-game]").classList.add("game-fullscreen");
@@ -57,9 +54,9 @@ let i = 0;
 function runAnimation() {
     counter += 1;
     const dinoImages = [
-        '<img class="char char-fullscreen" id="char" src="./assets/img/dino.png" alt="dino" data-char />',
-        '<img class="char char-fullscreen" id="char" src="./assets/img/dino1.png" alt="dino" data-char />',
-        '<img class="char char-fullscreen" id="char" src="./assets/img/dino2.png" alt="dino" data-char />',
+        '<img class="char" id="char" src="./assets/img/dino.png" alt="dino" data-char />',
+        '<img class="char" id="char" src="./assets/img/dino1.png" alt="dino" data-char />',
+        '<img class="char" id="char" src="./assets/img/dino2.png" alt="dino" data-char />',
     ];
 
     // Alternate dino pictures every 5 frames
@@ -165,3 +162,54 @@ function gameOver() {
     const popup = document.querySelector("[data-popup]");
     popup.classList.add("active");
 }
+
+function startGame() {
+    dino.isAlive = true;
+    render();
+    const obstacles = document.querySelector("[data-obstacles]");
+    obstacles.classList.add("hide");
+    score = 0;
+    runGame();
+    isColliding();
+}
+
+function returnHome() {
+    // Revert to small screen
+    document.querySelector("[data-game]").classList.remove("game-fullscreen");
+    // Revert dino
+    char.classList.remove("char-box-fullscreen");
+    // Remove score and show start text
+    document.querySelector(".scores").classList.add("hide");
+    document.querySelector("[data-start-text]").classList.remove("hide");
+    // Hide obstacle
+    document.querySelector("[data-obstacles]").classList.add("hide");
+    // Default dino
+    document.querySelector(["[data-char-box"]).innerHTML = `<img class="char" id="char" src="./assets/img/dino.png" alt="dino" data-char/>`;
+    // Stop sound
+    backgroudSound.stop();
+}
+
+(function initPopup() {
+    const popup = document.querySelector("[data-popup");
+
+    const close = document.querySelector("[data-close]");
+    close.addEventListener("click", () => {
+        popup.classList.remove("active");
+        returnHome();
+    });
+    const save = document.querySelector("[data-save]");
+    save.addEventListener("click", () => {
+        const username = document.querySelector("[data-username]").value;
+        console.log(username);
+    });
+    const playAgain = document.querySelector("[data-play-again]");
+    playAgain.addEventListener("click", () => {
+        popup.classList.remove("active");
+        startGame();
+    });
+    const exit = document.querySelector("[data-exit-game");
+    exit.addEventListener("click", () => {
+        popup.classList.remove("active");
+        returnHome();
+    });
+})();
