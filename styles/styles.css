@@ -118,6 +118,21 @@ h1 {
   height: 70px;
 }
 
+.speed2 {
+  -webkit-animation: move 2s infinite linear;
+          animation: move 2s infinite linear;
+}
+
+.speed1_5 {
+  -webkit-animation: move 1.5s infinite linear;
+          animation: move 1.5s infinite linear;
+}
+
+.speed1 {
+  -webkit-animation: move 1s infinite linear;
+          animation: move 1s infinite linear;
+}
+
 .char-box {
   width: 50px;
   height: 50px;

@@ -58,7 +58,16 @@ h1 {
     left: calc(100vw - 65px);
     width: 60px;
     height: 70px;
-    // animation: move 2s infinite linear;
+}
+
+.speed2 {
+    animation: move 2s infinite linear;
+}
+.speed1_5 {
+    animation: move 1.5s infinite linear;
+}
+.speed1 {
+    animation: move 1s infinite linear;
 }
 
 .char-box {

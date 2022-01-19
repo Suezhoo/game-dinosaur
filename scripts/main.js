@@ -43,9 +43,12 @@ function render() {
     // Show score and remove start text
     document.querySelector(".scores").classList.remove("hide");
     document.querySelector("[data-start-text]").classList.add("hide");
-    // Add obstacles
-    document.querySelector("[data-obstacles]").classList.remove("hide");
-    // addObstacle();
+    // Unhide obstacles
+    const obstacles = document.querySelector("[data-obstacles]");
+    setTimeout(function () {
+        obstacles.classList.remove("hide");
+    }, 2000);
+    obstacles.innerHTML = `<img src="./assets/img/cactus.png" class="speed2" alt="cactus" data-obstacle/>`;
 }
 
 let counter = 0;
@@ -70,19 +73,16 @@ function runAnimation() {
     // Freeze image if jumping
     if (dino.state == "jumping") char.innerHTML = dinoImages[0];
 
-    // Callback to keep animation running
+    // Callback to keep game running
     runGame();
 }
 
 let score = 0;
 function runGame() {
     const fps = 60;
-    if (counter % 20 === 0) {
-        score += 1;
-    }
+    if (counter % 20 === 0) score += 1;
 
     // Scoring
-
     const _score = document.querySelector("[data-score]");
     const _highscore = document.querySelector("[data-high-score]");
 
@@ -104,6 +104,10 @@ function runGame() {
         else if (score > 99999) _highscore.innerHTML = score;
     }
 
+    // Obstacle speed
+    obstacleSpeed();
+
+    // Check if dino is still alive
     if (dino.isAlive)
         setTimeout(function () {
             requestAnimationFrame(runAnimation);
@@ -113,15 +117,18 @@ function runGame() {
     }
 }
 
-function addObstacle() {
-    document.querySelector("[data-obstacles]").innerHTML = '<img src="./assets/img/cactus.png" alt="cactus" />';
+function obstacleSpeed() {
+    const obstacle = document.querySelector("[data-obstacle]");
+    if (score <= 100) obstacle.classList.add("speed2");
+    if (score >= 100 && score <= 1000) obstacle.classList.replace("speed2", "speed1_5");
+    if (score >= 1000) obstacle.classList.replace("speed1_5", "speed1");
 }
 
 const jumpSound = new sound("assets/soundtrack/acidgo.mp3");
 function jump() {
     if (!char.classList.contains("jump")) {
+        jumpSound.replay();
         // Jump sound
-        jumpSound.play();
         char.classList.add("jump");
         setTimeout(function () {
             char.classList.remove("jump");
