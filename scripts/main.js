@@ -11,16 +11,17 @@ let dino = {
     isAlive: true,
 };
 
-// Dino dom
+// DOMs
 const char = document.querySelector("[data-char-box]");
 
 window.onload = function () {
     document.addEventListener("keydown", (e) => {
         if (e.code === "Space" && gameRunning == false) {
             gameRunning = true;
-            render();
-            runGame();
-        } else if (e.code === "Space" && gameRunning == true) {
+            render(); // Setup the game display
+            runGame(); // Run the game
+            isColliding(); // Check for collision
+        } else if (e.code === "Space" && gameRunning == true && dino.isAlive) {
             dino.state = "jumping";
             jump();
         }
@@ -135,4 +136,32 @@ function jump() {
             dino.state = "running";
         }, 500);
     }
+}
+
+function isColliding() {
+    const obstacle = document.querySelector("[data-obstacle]");
+
+    setInterval(function () {
+        let charTop = parseInt(window.getComputedStyle(char).getPropertyValue("top")); // Get current dino Y position
+        let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left")); // Get current cactus X positon
+        // Detect collision
+        if (obstacleLeft < 75 && obstacleLeft > 0 && charTop >= 160) {
+            gameOver();
+        }
+    }, 10);
+}
+
+function gameOver() {
+    dino.isAlive = false;
+    // Hide obstacle
+    const obstacle = document.querySelector("[data-obstacle]");
+    obstacle.classList.add("paused");
+
+    // Showing achieved score in popup
+    const scoreElement = document.querySelector("[data-score-popup]");
+    scoreElement.textContent = `Score: ${score}`;
+
+    // Show popup
+    const popup = document.querySelector("[data-popup]");
+    popup.classList.add("active");
 }

@@ -9,6 +9,23 @@
         <script src="./scripts/main.js" type="module" defer></script>
     </head>
     <body>
+        <div class="popup" id="popup-1" data-popup>
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="content-flex">
+                    <div class="close-btn">&times;</div>
+                    <h1 class="score" data-score-popup>SCORE - 2365</h1>
+                    <div class="save-fields">
+                        <input type="text" name="username" id="username" placeholder="Type name here..." />
+                        <button class="save">SAVE</button>
+                    </div>
+                    <div class="play-or-exit">
+                        <button class="play-again">Play again</button>
+                        <button class="exit-game">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="game" data-game>
             <div class="scores hide">
                 <p id="high-score" data-high-score>00033</p>
@@ -17,6 +34,6 @@
             <div class="char-box" data-char-box></div>
             <div class="obstacles hide" data-obstacles></div>
         </div>
-        <h1 data-start-text>Press Space to play...</h1>
+        <h1 id="start-text" data-start-text>Press Space to play...</h1>
     </body>
 </html>
