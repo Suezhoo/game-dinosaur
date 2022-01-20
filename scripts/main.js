@@ -27,6 +27,7 @@ window.onload = function () {
             gameRunning = true;
             displayHighScore();
             startGame();
+            return;
         }
         // else if (e.code === "Space" && gameRunning == true && dino.isAlive)
         else {
