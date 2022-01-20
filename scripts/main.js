@@ -21,10 +21,15 @@ const char = document.querySelector("[data-char-box]");
 
 window.onload = function () {
     document.addEventListener("keydown", (e) => {
+        console.log("Gamerunning keypress: ", gameRunning);
         if (e.code === "Space" && gameRunning == false) {
+            gameRunning = true;
             displayHighScore();
             startGame();
-        } else if (e.code === "Space" && gameRunning == true && dino.isAlive) {
+        }
+        // else if (e.code === "Space" && gameRunning == true && dino.isAlive)
+        else {
+            console.log("Spel is nog bezig");
             dino.state = "jumping";
             jump();
         }
@@ -152,7 +157,6 @@ function isColliding() {
     // Detect collision
     if (obstacleLeft < 75 && obstacleLeft > 0 && charTop >= 160) {
         dino.isAlive = false;
-        gameRunning = false;
     }
 }
 
@@ -198,9 +202,8 @@ function displayHighScore() {
 }
 
 function startGame() {
-    gameRunning = true;
     dino.isAlive = true;
-    // console.log("Logging from Start game function", dino.isAlive, gameRunning);
+    console.log("Spel gestart", dino.isAlive, gameRunning);
     render();
     const obstacles = document.querySelector("[data-obstacles]");
     obstacles.classList.add("hide");
@@ -230,6 +233,7 @@ function returnHome() {
 
     const close = document.querySelector("[data-close]");
     close.addEventListener("click", () => {
+        gameRunning = false;
         console.log(`gamerunning: ${gameRunning}, dino alive: ${dino.isAlive}`);
         popup.classList.remove("active");
         // Reset saved status
@@ -275,7 +279,7 @@ function returnHome() {
     });
     const playAgain = document.querySelector("[data-play-again]");
     playAgain.addEventListener("click", () => {
-        console.log(`gamerunning: ${gameRunning},dino alive: ${dino.isAlive}`);
+        // console.log(`gamerunning: ${gameRunning},dino alive: ${dino.isAlive}`);
         popup.classList.remove("active");
         // Reset saved status
         save.classList.remove("saved");
@@ -283,6 +287,7 @@ function returnHome() {
     });
     const exit = document.querySelector("[data-exit-game");
     exit.addEventListener("click", () => {
+        gameRunning = false;
         console.log(`gamerunning: ${gameRunning},dino alive: ${dino.isAlive}`);
         popup.classList.remove("active");
         // Reset saved status
