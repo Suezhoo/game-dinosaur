@@ -8,8 +8,12 @@ let gameRunning = false;
 // dino character
 let dino = {
     state: "running",
-    isAlive: true,
+    isAlive: false,
 };
+
+setInterval(() => {
+    console.log(`Interval: Alive: ${dino.isAlive}, Game running: ${gameRunning}`);
+}, 100);
 
 // DOMs
 const char = document.querySelector("[data-char-box]");
@@ -17,11 +21,12 @@ const char = document.querySelector("[data-char-box]");
 window.onload = function () {
     document.addEventListener("keydown", (e) => {
         if (e.code === "Space" && gameRunning == false) {
-            gameRunning = true;
             startGame();
+            console.log("not jumping");
         } else if (e.code === "Space" && gameRunning == true && dino.isAlive) {
             dino.state = "jumping";
             jump();
+            console.log("jumping");
         }
     });
 };
@@ -105,6 +110,8 @@ function runGame() {
     // Obstacle speed
     obstacleSpeed();
 
+    isColliding();
+
     // Check if dino is still alive
     if (dino.isAlive)
         setTimeout(function () {
@@ -112,6 +119,8 @@ function runGame() {
         }, 1000 / fps);
     if (!dino.isAlive) {
         cancelAnimationFrame(runAnimation);
+        console.log("Logging from animation scope", dino.isAlive, gameRunning);
+        gameOver();
     }
 }
 
@@ -138,18 +147,16 @@ function jump() {
 function isColliding() {
     const obstacle = document.querySelector("[data-obstacle]");
 
-    setInterval(function () {
-        let charTop = parseInt(window.getComputedStyle(char).getPropertyValue("top")); // Get current dino Y position
-        let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left")); // Get current cactus X positon
-        // Detect collision
-        if (obstacleLeft < 75 && obstacleLeft > 0 && charTop >= 160) {
-            gameOver();
-        }
-    }, 10);
+    let charTop = parseInt(window.getComputedStyle(char).getPropertyValue("top")); // Get current dino Y position
+    let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left")); // Get current cactus X positon
+    // Detect collision
+    if (obstacleLeft < 75 && obstacleLeft > 0 && charTop >= 160) {
+        dino.isAlive = false;
+        gameRunning = false;
+    }
 }
 
 function gameOver() {
-    dino.isAlive = false;
     // Hide obstacle
     const obstacle = document.querySelector("[data-obstacle]");
     obstacle.classList.add("paused");
@@ -164,7 +171,9 @@ function gameOver() {
 }
 
 function startGame() {
+    gameRunning = true;
     dino.isAlive = true;
+    console.log("Logging from Start game function", dino.isAlive, gameRunning);
     render();
     const obstacles = document.querySelector("[data-obstacles]");
     obstacles.classList.add("hide");

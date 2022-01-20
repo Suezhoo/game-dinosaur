@@ -6,7 +6,7 @@ export class sound {
         this.sound.src = src;
         this.sound.setAttribute("preload", "auto");
         this.sound.setAttribute("controls", "none");
-        this.sound.volume = 0.5;
+        this.sound.volume = 0.0;
         this.sound.style.display = "none";
         document.body.appendChild(this.sound);
         this.play = function () {
