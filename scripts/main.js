@@ -21,6 +21,7 @@ const char = document.querySelector("[data-char-box]");
 
 window.onload = function () {
     document.addEventListener("keyup", (e) => {
+        console.log(e);
         console.log("Gamerunning keypress: ", gameRunning);
         if (e.code === "Space" && gameRunning == false) {
             gameRunning = true;
