@@ -230,6 +230,7 @@ function returnHome() {
 
     const close = document.querySelector("[data-close]");
     close.addEventListener("click", () => {
+        console.log(`gamerunning: ${gameRunning}, dino alive: ${dino.isAlive}`);
         popup.classList.remove("active");
         // Reset saved status
         save.classList.remove("saved");
@@ -237,6 +238,7 @@ function returnHome() {
     });
     const save = document.querySelector("[data-save]");
     save.addEventListener("click", async () => {
+        console.log(`gamerunning: ${gameRunning},dino alive: ${dino.isAlive}`);
         const username = document.querySelector("[data-username]").value;
         const messageBox = document.querySelector("[data-message]");
         if (!username) {
@@ -273,6 +275,7 @@ function returnHome() {
     });
     const playAgain = document.querySelector("[data-play-again]");
     playAgain.addEventListener("click", () => {
+        console.log(`gamerunning: ${gameRunning},dino alive: ${dino.isAlive}`);
         popup.classList.remove("active");
         // Reset saved status
         save.classList.remove("saved");
@@ -280,6 +283,7 @@ function returnHome() {
     });
     const exit = document.querySelector("[data-exit-game");
     exit.addEventListener("click", () => {
+        console.log(`gamerunning: ${gameRunning},dino alive: ${dino.isAlive}`);
         popup.classList.remove("active");
         // Reset saved status
         save.classList.remove("saved");
@@ -289,5 +293,5 @@ function returnHome() {
 
 (function () {
     leaderboard.displayScores();
-    // setInterval(() => leaderboard.displayScores(), 5000);
+    setInterval(() => leaderboard.displayScores(), 5000);
 })();
