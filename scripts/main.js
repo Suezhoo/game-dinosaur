@@ -198,9 +198,19 @@ function returnHome() {
         returnHome();
     });
     const save = document.querySelector("[data-save]");
-    save.addEventListener("click", () => {
+    save.addEventListener("click", async () => {
+        const save = document.querySelector("[data-save]");
+        if (save.classList.contains("saved")) return alert("Already saved");
+        save.classList.add("saving");
+        save.textContent = "...";
         const username = document.querySelector("[data-username]").value;
-        console.log(username);
+        await fetch("https://suezhoo-dinosaur.herokuapp.com/score", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: document.querySelector("[data-username]").value, score }),
+        });
+        save.classList.replace("saving", "saved");
+        save.textContent = "DONE";
     });
     const playAgain = document.querySelector("[data-play-again]");
     playAgain.addEventListener("click", () => {

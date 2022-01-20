@@ -209,6 +209,17 @@
   font-size: 0.75trem;
 }
 
+.content-flex .saving {
+  background-color: #202124;
+  color: lightgrey;
+}
+
+.content-flex .saved,
+.content-flex .saved:hover {
+  background: #202124;
+  color: limegreen;
+}
+
 .popup.active .overlay {
   display: block;
 }

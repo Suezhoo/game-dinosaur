@@ -117,6 +117,17 @@
     font-size: 0.75trem;
 }
 
+.content-flex .saving {
+    background-color: $defaultColor;
+    color: lightgrey;
+}
+
+.content-flex .saved,
+.content-flex .saved:hover {
+    background: $defaultColor;
+    color: limegreen;
+}
+
 .popup.active .overlay {
     display: block;
 }
