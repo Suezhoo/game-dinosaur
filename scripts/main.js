@@ -20,7 +20,7 @@ let dino = {
 const char = document.querySelector("[data-char-box]");
 
 window.onload = function () {
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener("keyup", (e) => {
         console.log("Gamerunning keypress: ", gameRunning);
         if (e.code === "Space" && gameRunning == false) {
             gameRunning = true;
