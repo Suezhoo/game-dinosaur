@@ -492,4 +492,14 @@ body {
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
+
+footer {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: lightgrey;
+  font-weight: 200;
+  font-size: 0.8rem;
+  font-style: italic;
+}
 /*# sourceMappingURL=styles.css.map */
