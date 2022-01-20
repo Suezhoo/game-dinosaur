@@ -34,6 +34,11 @@
     width: 275px;
 }
 
+.leaderboard li::before,
+.leaderboard li::after {
+    display: none;
+}
+
 .leaderboard .first-5 {
     text-align: left;
 }

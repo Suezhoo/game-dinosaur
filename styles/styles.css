@@ -210,7 +210,7 @@
 }
 
 .content-flex .saving {
-  background-color: #202124;
+  background: #202124;
   color: lightgrey;
 }
 
@@ -218,6 +218,25 @@
 .content-flex .saved:hover {
   background: #202124;
   color: limegreen;
+}
+
+.content-flex .message {
+  width: 61%;
+  color: #202124;
+  border-radius: 5px;
+  text-align: left;
+  padding: 5px 5px 5px 10px;
+  font-size: 0.75rem;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+}
+
+.content-flex .error {
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.content-flex .success {
+  background: rgba(0, 255, 0, 0.5);
 }
 
 .popup.active .overlay {
@@ -276,6 +295,11 @@
 .leaderboard ol li {
   margin: 5px 0px;
   width: 275px;
+}
+
+.leaderboard li::before,
+.leaderboard li::after {
+  display: none;
 }
 
 .leaderboard .first-5 {

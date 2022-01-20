@@ -1,5 +1,5 @@
 "use strict";
-
+import * as leaderboard from "./leaderboard.js";
 import { sound } from "./sound.js";
 
 // Game state
@@ -203,31 +203,63 @@ function returnHome() {
     const close = document.querySelector("[data-close]");
     close.addEventListener("click", () => {
         popup.classList.remove("active");
+        // Reset saved status
+        save.classList.remove("saved");
         returnHome();
     });
     const save = document.querySelector("[data-save]");
     save.addEventListener("click", async () => {
-        const save = document.querySelector("[data-save]");
-        if (save.classList.contains("saved")) return alert("Already saved");
+        const username = document.querySelector("[data-username]").value;
+        const messageBox = document.querySelector("[data-message]");
+        if (!username) {
+            messageBox.classList = "";
+            messageBox.classList.add("message", "error");
+            messageBox.textContent = "Enter a name before saving.";
+            return;
+        }
+        if (save.classList.contains("saved")) {
+            messageBox.classList = "";
+            messageBox.classList.add("message", "error");
+            messageBox.textContent = "Can not save same run twice";
+            return;
+        }
         save.classList.add("saving");
         save.textContent = "...";
-        const username = document.querySelector("[data-username]").value;
         await fetch("https://suezhoo-dinosaur.herokuapp.com/score", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: document.querySelector("[data-username]").value, score }),
+        }).then((data) => {
+            if (!data.ok) {
+                messageBox.classList.replace("hide", "error");
+                messageBox.textContent = "Something went wrong, try again later...";
+            } else {
+                messageBox.classList = "";
+                messageBox.classList.add("message", "success");
+                messageBox.textContent = "Score successfully saved";
+                save.classList.replace("saving", "saved");
+                save.textContent = "DONE";
+            }
         });
-        save.classList.replace("saving", "saved");
-        save.textContent = "DONE";
+        leaderboard.displayScores();
     });
     const playAgain = document.querySelector("[data-play-again]");
     playAgain.addEventListener("click", () => {
         popup.classList.remove("active");
+        // Reset saved status
+        save.classList.remove("saved");
         startGame();
     });
     const exit = document.querySelector("[data-exit-game");
     exit.addEventListener("click", () => {
         popup.classList.remove("active");
+        // Reset saved status
+        save.classList.remove("saved");
         returnHome();
     });
+})();
+
+(function () {
+    leaderboard.displayScores();
+    // setInterval(() => leaderboard.displayScores(), 5000);
 })();
