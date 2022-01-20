@@ -11,9 +11,10 @@ let dino = {
     isAlive: false,
 };
 
-setInterval(() => {
-    console.log(`Interval: Alive: ${dino.isAlive}, Game running: ${gameRunning}`);
-}, 100);
+// Interval to log alive and gamerunning values every 0.1 sec
+// setInterval(() => {
+//     console.log(`Interval: Alive: ${dino.isAlive}, Game running: ${gameRunning}`);
+// }, 100);
 
 // DOMs
 const char = document.querySelector("[data-char-box]");
@@ -22,11 +23,9 @@ window.onload = function () {
     document.addEventListener("keydown", (e) => {
         if (e.code === "Space" && gameRunning == false) {
             startGame();
-            console.log("not jumping");
         } else if (e.code === "Space" && gameRunning == true && dino.isAlive) {
             dino.state = "jumping";
             jump();
-            console.log("jumping");
         }
     });
 };
@@ -119,7 +118,7 @@ function runGame() {
         }, 1000 / fps);
     if (!dino.isAlive) {
         cancelAnimationFrame(runAnimation);
-        console.log("Logging from animation scope", dino.isAlive, gameRunning);
+        // console.log("Logging from animation scope", dino.isAlive, gameRunning);
         gameOver();
     }
 }
@@ -173,7 +172,7 @@ function gameOver() {
 function startGame() {
     gameRunning = true;
     dino.isAlive = true;
-    console.log("Logging from Start game function", dino.isAlive, gameRunning);
+    // console.log("Logging from Start game function", dino.isAlive, gameRunning);
     render();
     const obstacles = document.querySelector("[data-obstacles]");
     obstacles.classList.add("hide");
