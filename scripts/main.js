@@ -22,6 +22,7 @@ const char = document.querySelector("[data-char-box]");
 window.onload = function () {
     document.addEventListener("keydown", (e) => {
         if (e.code === "Space" && gameRunning == false) {
+            displayHighScore();
             startGame();
         } else if (e.code === "Space" && gameRunning == true && dino.isAlive) {
             dino.state = "jumping";
@@ -51,6 +52,7 @@ function render() {
         obstacles.classList.remove("hide");
     }, 2000);
     obstacles.innerHTML = `<img src="./assets/img/cactus.png" class="speed2" alt="cactus" data-obstacle/>`;
+    // Render hidescore if != 0
 }
 
 let counter = 0;
@@ -102,8 +104,7 @@ function runGame() {
         else if (score >= 10 && score <= 99) _highscore.innerHTML = `000${score}`;
         else if (score >= 100 && score <= 999) _highscore.innerHTML = `00${score}`;
         else if (score >= 1000 && score <= 9999) _highscore.innerHTML = `0${score}`;
-        else if (score >= 10000 && score <= 99999) _highscore.innerHTML = `${score}`;
-        else if (score > 99999) _highscore.innerHTML = score;
+        else if (score >= 10000) _highscore.innerHTML = `${score}`;
     }
 
     // Obstacle speed
@@ -167,6 +168,33 @@ function gameOver() {
     // Show popup
     const popup = document.querySelector("[data-popup]");
     popup.classList.add("active");
+
+    // Save score locally
+    saveHighScore(score);
+}
+
+function saveHighScore(scr) {
+    const hiScore = localStorage.getItem("highscore");
+    const newScore = scr;
+    // Check to see if new score is higher than old score
+    if (newScore > hiScore) localStorage.setItem("highscore", newScore);
+    displayHighScore();
+}
+
+function displayHighScore() {
+    const hiScoreElement = document.querySelector("[data-high-score]");
+    const hiScoreStorage = localStorage.getItem("highscore");
+
+    // Hide if highscore is 0 || null (Default value if never played)
+    if (hiScoreStorage == null || hiScoreStorage == 0) hiScoreElement.classList.add("hide");
+    else if (hiScoreStorage != 0) {
+        hiScoreElement.classList.remove("hide");
+        if (hiScoreStorage <= 9) hiScoreElement.textContent = `0000${hiScoreStorage}`;
+        else if (hiScoreStorage >= 10 && hiScoreStorage <= 99) hiScoreElement.textContent = `000${hiScoreStorage}`;
+        else if (hiScoreStorage >= 100 && hiScoreStorage <= 999) hiScoreElement.textContent = `00${hiScoreStorage}`;
+        else if (hiScoreStorage >= 1000 && hiScoreStorage <= 9999) hiScoreElement.textContent = `0${hiScoreStorage}`;
+        else if (hiScoreStorage >= 10000) hiScoreElement.textContent = hiScoreStorage;
+    }
 }
 
 function startGame() {
