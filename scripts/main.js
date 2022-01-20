@@ -21,19 +21,19 @@ const char = document.querySelector("[data-char-box]");
 
 window.onload = function () {
     document.addEventListener("keyup", (e) => {
-        console.log(e);
-        console.log("Gamerunning keypress: ", gameRunning);
-        if (e.code === "Space" && gameRunning == false) {
-            gameRunning = true;
-            displayHighScore();
-            startGame();
-            return;
-        }
-        // else if (e.code === "Space" && gameRunning == true && dino.isAlive)
-        else {
-            console.log("Spel is nog bezig");
-            dino.state = "jumping";
-            jump();
+        if (e.code === "Space") {
+            if (gameRunning == false) {
+                gameRunning = true;
+                displayHighScore();
+                startGame();
+                return;
+            }
+            // else if (e.code === "Space" && gameRunning == true && dino.isAlive)
+            else {
+                console.log("Spel is nog bezig");
+                dino.state = "jumping";
+                jump();
+            }
         }
     });
 };
