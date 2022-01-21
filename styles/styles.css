@@ -443,7 +443,7 @@ body {
 .game-fullscreen {
   width: 100vw;
   height: 400px;
-  min-height: 200px;
+  min-height: 400px;
   -webkit-transition: 1s;
   transition: 1s;
   border: 3px solid black;

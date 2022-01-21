@@ -8,6 +8,18 @@ const game = new Game();
 
 // Initialize Button to start the game
 window.onload = function () {
+    //  Block scrolling with spacebar
+    window.addEventListener("keydown", function (e) {
+        if (e.code === "Space") {
+            document.body.style.overflow = "hidden";
+        }
+    });
+    window.addEventListener("keyup", function (e) {
+        if (e.code === "Space") {
+            document.body.style.overflow = "auto";
+        }
+    });
+
     initializeGame();
     game.initPopup();
 };
