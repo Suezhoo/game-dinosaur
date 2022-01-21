@@ -156,6 +156,7 @@ export class Game {
         this.score = 0;
 
         m.stopInterval();
+        m.removeEventListener();
     }
     initPopup() {
         // DOMs
@@ -233,7 +234,6 @@ export class Game {
         // Hide obstacles
         document.querySelector("[data-obstacles").classList.add("hide");
         // Reset space eventlistener
-        m.removeEventListener();
         m.initializeGame();
     }
 }
