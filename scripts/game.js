@@ -164,13 +164,8 @@ export class Game {
         const scorePopup = document.querySelector("[data-score-popup]");
         scorePopup.textContent = `Score: ${this.score}`;
 
-        // Initialize Popup
-        // this.initPopup();
         // Store high score locally
         this.storeHighScore();
-
-        // Reset score to 0
-        this.score = 0;
 
         m.stopInterval();
         m.removeEventListener();
@@ -190,6 +185,8 @@ export class Game {
             messageBox.classList.add("message", "hide");
             saveBtn.textContent = "SAVE";
             this.revertToHomePage();
+            // Reset score to 0
+            this.score = 0;
         });
         // Exit button
         const exitBtn = document.querySelector("[data-exit-game]");
@@ -202,6 +199,8 @@ export class Game {
             messageBox.classList.add("message", "hide");
             saveBtn.textContent = "SAVE";
             this.revertToHomePage();
+            // Reset score to 0
+            this.score = 0;
         });
         // Play Again button
         const playAgainBtn = document.querySelector("[data-play-again]");
@@ -213,6 +212,8 @@ export class Game {
             messageBox.classList.add("message", "hide");
             saveBtn.textContent = "SAVE";
             this.restartGame();
+            // Reset score to 0
+            this.score = 0;
         });
         // Save score
         const saveBtn = document.querySelector("[data-save]");
@@ -250,6 +251,8 @@ export class Game {
                     saveBtn.textContent = "DONE";
                 }
             });
+            // Reset score to 0
+            this.score = 0;
             leaderboard.displayScores();
         });
     }

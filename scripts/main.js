@@ -1,6 +1,7 @@
 "use strict";
 
 import { Game } from "./game.js";
+import * as leaderboard from "./leaderboard.js";
 
 // Game instance
 const game = new Game();
@@ -44,4 +45,10 @@ export function startInterval() {
     }, 1000 / game.fps); // 60 frames per second
 }
 
-// Running animation
+// Update leaderboard every 10seconds
+(function updateLeaderboard() {
+    leaderboard.displayScores();
+    let leaderboardUpdate = setInterval(() => {
+        leaderboard.displayScores();
+    }, 10000);
+})();
