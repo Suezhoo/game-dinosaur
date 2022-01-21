@@ -178,12 +178,17 @@ export class Game {
     initPopup() {
         // DOMs
         const p = document.querySelector("[data-popup]");
+        const messageBox = document.querySelector("[data-message]");
         // Cross button
         const closeBtn = document.querySelector("[data-close]");
         closeBtn.addEventListener("click", (e) => {
             p.classList.remove("active");
             // Reset score saved status
-            saveBtn.classList.remove("saved");
+            saveBtn.classList.remove("saved", "saving");
+            // Defaulting button and error message
+            messageBox.classList = "";
+            messageBox.classList.add("message", "hide");
+            saveBtn.textContent = "SAVE";
             this.revertToHomePage();
         });
         // Exit button
@@ -191,21 +196,28 @@ export class Game {
         exitBtn.addEventListener("click", (e) => {
             p.classList.remove("active");
             // Reset score saved status
-            saveBtn.classList.remove("saved");
+            saveBtn.classList.remove("saved", "saving");
+            // Defaulting button and error message
+            messageBox.classList = "";
+            messageBox.classList.add("message", "hide");
+            saveBtn.textContent = "SAVE";
             this.revertToHomePage();
         });
         // Play Again button
         const playAgainBtn = document.querySelector("[data-play-again]");
         playAgainBtn.addEventListener("click", () => {
             p.classList.remove("active");
-            saveBtn.classList.remove("saved");
+            saveBtn.classList.remove("saved", "saving");
+            // Defaulting button and error message
+            messageBox.classList = "";
+            messageBox.classList.add("message", "hide");
+            saveBtn.textContent = "SAVE";
             this.restartGame();
         });
         // Save score
         const saveBtn = document.querySelector("[data-save]");
         saveBtn.addEventListener("click", async () => {
             const name = document.querySelector("[data-username").value;
-            const messageBox = document.querySelector("[data-message]");
             // No name given
             if (!name) {
                 messageBox.classList = "";
