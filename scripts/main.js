@@ -8,6 +8,7 @@ const game = new Game();
 // Initialize Button to start the game
 window.onload = function () {
     initializeGame();
+    game.initPopup();
 };
 
 export function initializeGame() {
@@ -19,18 +20,14 @@ export function removeEventListener() {
 }
 
 function initSpace(e) {
+    console.log(game.isRunning, game.dino.isAlive);
     if (e.code === "Space" && !game.isRunning) {
         console.log("start");
-        prepare();
+        game.startGame();
     } else if (e.code === "Space" && game.isRunning && game.dino.isAlive) {
         console.log("jump");
         game.dino.jump();
     }
-}
-
-function prepare() {
-    game.prepareGame();
-    game.animate();
 }
 
 export function stopInterval() {
@@ -48,5 +45,3 @@ export function startInterval() {
 }
 
 // Running animation
-
-game.initPopup();

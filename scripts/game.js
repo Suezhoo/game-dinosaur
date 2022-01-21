@@ -17,8 +17,10 @@ export class Game {
         this.imageNumber = 0;
         this.dino = new Dinosaur();
     }
-    setUpInterval(speed) {}
     prepareGame() {
+        //
+        console.log("Everything prepared for fullscreen");
+
         // Remove 'Press Space to play...'
         document.querySelector("[data-start-text]").classList.add("hide");
         // Game frame
@@ -54,10 +56,24 @@ export class Game {
         // this.determineObstacleSpeed();
         // Check for collision
         this.isColliding();
-        // If collision happened
-        if (!this.dino.isAlive) {
-            this.gameOver();
-        }
+    }
+    startGame() {
+        this.prepareGame();
+        this.animate();
+    }
+    restartGame() {
+        // Remove obstacle
+        document.querySelector("[data-obstacles]").classList.add("hide");
+        // Set dino alive to true
+        this.dino.isAlive = true;
+        // Set game running to true
+        this.isRunning = true;
+        // Start running animation interval
+        m.startInterval();
+        // Initalize Space
+        m.initializeGame();
+        // Unhide obstacle
+        this.unhideObstacles();
     }
     runningAnimation() {
         // Running
@@ -126,6 +142,7 @@ export class Game {
         if (obstacleLeft < 75 && obstacleLeft > 0 && distanceY >= 10) {
             this.dino.isAlive = false;
             this.isRunning = false;
+            this.gameOver();
         }
     }
     gameOver() {
@@ -148,7 +165,7 @@ export class Game {
         scorePopup.textContent = `Score: ${this.score}`;
 
         // Initialize Popup
-        this.initPopup();
+        // this.initPopup();
         // Store high score locally
         this.storeHighScore();
 
@@ -163,7 +180,7 @@ export class Game {
         const p = document.querySelector("[data-popup]");
         // Cross button
         const closeBtn = document.querySelector("[data-close]");
-        closeBtn.addEventListener("click", () => {
+        closeBtn.addEventListener("click", (e) => {
             p.classList.remove("active");
             // Reset score saved status
             saveBtn.classList.remove("saved");
@@ -171,7 +188,7 @@ export class Game {
         });
         // Exit button
         const exitBtn = document.querySelector("[data-exit-game]");
-        exitBtn.addEventListener("click", () => {
+        exitBtn.addEventListener("click", (e) => {
             p.classList.remove("active");
             // Reset score saved status
             saveBtn.classList.remove("saved");
@@ -180,7 +197,9 @@ export class Game {
         // Play Again button
         const playAgainBtn = document.querySelector("[data-play-again]");
         playAgainBtn.addEventListener("click", () => {
-            console.log("click play again");
+            p.classList.remove("active");
+            saveBtn.classList.remove("saved");
+            this.restartGame();
         });
         // Save score
         const saveBtn = document.querySelector("[data-save]");
@@ -223,6 +242,9 @@ export class Game {
         });
     }
     revertToHomePage() {
+        //
+        console.log("Everything prepared for default screen");
+
         // Revert game screen to small
         document.querySelector("[data-game]").classList.replace("game-fullscreen", "game");
         // Revert dino size to small
