@@ -11,10 +11,19 @@
 body {
     width: 100vw;
     height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none; // Hide for IE and Edge
+    scrollbar-width: none; // Hide for firefox
     @include flexCenter;
     gap: 50px;
     flex-direction: column;
     background: $defaultColor;
+}
+
+// Hide scrollbar for Chrome, Safari and Opera
+::-webkit-scrollbar {
+    display: none;
 }
 
 #start-text {
@@ -43,6 +52,7 @@ body {
 .game {
     width: 600px;
     height: 200px;
+    min-height: 200px;
     border: 3px solid black;
     transition: 1s;
 }
@@ -50,6 +60,7 @@ body {
 .game-fullscreen {
     width: 100vw;
     height: 400px;
+    min-height: 200px;
     transition: 1s;
     border: 3px solid black;
     // overflow: hidden;
@@ -109,9 +120,8 @@ body {
 }
 
 footer {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
+    padding-left: 35px;
+    align-self: flex-start;
     color: lightgrey;
     font-weight: 200;
     font-size: 0.8rem;

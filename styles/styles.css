@@ -370,6 +370,10 @@
 body {
   width: 100vw;
   height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -385,6 +389,10 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   background: #202124;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 #start-text {
@@ -418,6 +426,7 @@ body {
 .game {
   width: 600px;
   height: 200px;
+  min-height: 200px;
   border: 3px solid black;
   -webkit-transition: 1s;
   transition: 1s;
@@ -426,6 +435,7 @@ body {
 .game-fullscreen {
   width: 100vw;
   height: 400px;
+  min-height: 200px;
   -webkit-transition: 1s;
   transition: 1s;
   border: 3px solid black;
@@ -495,9 +505,9 @@ body {
 }
 
 footer {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
+  padding-left: 35px;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
   color: lightgrey;
   font-weight: 200;
   font-size: 0.8rem;
