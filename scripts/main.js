@@ -21,12 +21,9 @@ export function removeEventListener() {
 }
 
 function initSpace(e) {
-    console.log(game.isRunning, game.dino.isAlive);
     if (e.code === "Space" && !game.isRunning) {
-        console.log("start");
         game.startGame();
     } else if (e.code === "Space" && game.isRunning && game.dino.isAlive) {
-        console.log("jump");
         game.dino.jump();
     }
 }
@@ -38,7 +35,6 @@ export function stopInterval() {
 let animationInterval;
 export function startInterval() {
     animationInterval = setInterval(() => {
-        console.log(game.isRunning, game.dino.isAlive);
         if (game.isRunning && game.dino.isAlive) {
             game.animate();
         }

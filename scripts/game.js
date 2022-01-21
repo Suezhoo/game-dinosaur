@@ -1,4 +1,5 @@
 import { Dinosaur } from "./dino.js";
+import { Sound } from "./sound.js";
 import * as leaderboard from "./leaderboard.js";
 import * as m from "./main.js";
 
@@ -16,11 +17,19 @@ export class Game {
         ];
         this.imageNumber = 0;
         this.dino = new Dinosaur();
+        this.backgroundSound = new Sound("assets/soundtrack/ome_robert.mp3");
+    }
+    playBackgroudSound() {
+        // Adding background song
+        this.backgroundSound.replay();
+        // Loop after 137 seconds (sound duration)
+        setInterval(function () {
+            backgroudSound.replay();
+        }, 137000);
     }
     prepareGame() {
-        //
-        console.log("Everything prepared for fullscreen");
-
+        // Play background sound
+        this.playBackgroudSound();
         // Remove 'Press Space to play...'
         document.querySelector("[data-start-text]").classList.add("hide");
         // Game frame
@@ -62,6 +71,8 @@ export class Game {
         this.animate();
     }
     restartGame() {
+        // Play background sound
+        this.playBackgroudSound();
         // Remove obstacle
         document.querySelector("[data-obstacles]").classList.add("hide");
         // Set dino alive to true
@@ -86,7 +97,6 @@ export class Game {
     }
     displayScore() {
         if (this.iterator % 20 === 0) this.score += 1;
-
         // Preparing DOMs
         let scoreText = document.querySelector("[data-score]");
         let highScoreText = document.querySelector("[data-high-score]");
@@ -146,27 +156,23 @@ export class Game {
         }
     }
     gameOver() {
-        console.log(this.dino.isAlive, this.isRunning);
         // Defaulting dino stance upon death
         if (!this.dino.isAlive) {
             document.querySelector("[data-char-box").innerHTML = this.images[0];
         }
-
         // Freeze obstacle
         const obstacle = document.querySelector("[data-obstacle]");
         obstacle.classList.add("paused");
-
         // Show popup
         const popup = document.querySelector("[data-popup]");
         popup.classList.add("active");
-
         // Showing achieved score in popup
         const scorePopup = document.querySelector("[data-score-popup]");
         scorePopup.textContent = `Score: ${this.score}`;
-
         // Store high score locally
         this.storeHighScore();
-
+        // Stop sound
+        this.backgroundSound.stop();
         m.stopInterval();
         m.removeEventListener();
     }
@@ -257,9 +263,6 @@ export class Game {
         });
     }
     revertToHomePage() {
-        //
-        console.log("Everything prepared for default screen");
-
         // Revert game screen to small
         document.querySelector("[data-game]").classList.replace("game-fullscreen", "game");
         // Revert dino size to small
