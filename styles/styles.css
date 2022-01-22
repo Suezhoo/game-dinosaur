@@ -542,7 +542,8 @@ footer p {
 .rotate-device-image,
 .leaderboard-image,
 #mobile-rotation-text,
-#mobile-start-text {
+#mobile-start-text,
+.toggler {
   display: none;
 }
 
@@ -584,7 +585,7 @@ footer p {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    gap: 35;
+    gap: 35px;
   }
   #start-text {
     display: none;
@@ -610,10 +611,47 @@ footer p {
     height: 50px;
     padding: 5px;
     border-radius: 25%;
-    border: 2px solid lightgray;
-    background-color: #202124;
-    -webkit-box-shadow: 0px 0px 5px lightgray;
-            box-shadow: 0px 0px 5px lightgray;
+    border: 2px solid lightgrey;
+    -webkit-box-shadow: 0px 0px 5px lightgrey;
+            box-shadow: 0px 0px 5px lightgrey;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+  }
+  .leaderboard-image::before {
+    position: absolute;
+    top: 4px;
+    right: 7px;
+    content: url("../assets/img/leaderboard36x36.png");
+  }
+  .toggler {
+    display: block;
+    /* ALWAYS KEEPING THE TOGGLER OR THE CHECKBOX ON TOP OF EVERYTHING :  */
+    z-index: 2;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    opacity: 0;
+  }
+  .toggler:checked ~ .leaderboard-image {
+    -webkit-transform: scale(1.125);
+            transform: scale(1.125);
+    border-color: #00da00;
+    -webkit-box-shadow: 0px 0px 5px #00da00;
+            box-shadow: 0px 0px 5px #00da00;
+  }
+  .toggler:checked ~ .leaderboard-image {
+    content: url("../assets/img/leaderboard36x36-colored.png");
+  }
+  .toggler:checked ~ #mobile-start-text,
+  .toggler:checked ~ .game {
+    display: none;
+  }
+  .toggler:checked ~ .leaderboard {
+    display: block;
+    margin: 0;
   }
 }
 /*# sourceMappingURL=styles.css.map */
