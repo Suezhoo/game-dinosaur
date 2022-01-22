@@ -61,10 +61,32 @@ export function startInterval() {
     }, 10000);
 })();
 
-if (screen.height <= 480) {
-    let touches = 0;
-    document.addEventListener("touchstart", () => {
-        touches += 1;
-        document.querySelector("[data-start-text]").textContent = `Touched screen ${touches} times`;
-    });
+// Interval to check if user is on landscape and screen height lower than 480
+if (screen.orientation.type == "portrait-primary") {
+    const checkForMobile = setInterval(() => {
+        console.log("portrait");
+        if (screen.orientation.type == "landscape-primary") {
+            clearInterval(checkForMobile);
+            onMobile();
+        }
+    }, 100);
+} else if (screen.orientation.type == "landscape-primary") onMobile();
+
+function onMobile() {
+    if (screen.orientation.type == "landscape-primary") {
+        console.log("On landscape");
+        if (screen.orientation.type == "landscape-primary" && screen.height <= 480) {
+            let touches = 0;
+            document.addEventListener("touchstart", (e) => {
+                console.log(touches);
+                if (e.target == document.body || e.target.className == "game") {
+                    touches += 1;
+                    document.querySelector("[data-start-text]").textContent = `Touched screen ${touches} times`;
+                }
+            });
+        }
+    }
 }
+// If so, then stop the interval, and initialize touch listener
+
+// Block spacebar input when on mobile sizes
