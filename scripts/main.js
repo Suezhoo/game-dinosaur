@@ -60,3 +60,11 @@ export function startInterval() {
         leaderboard.displayScores();
     }, 10000);
 })();
+
+if (screen.height <= 480) {
+    let touches = 0;
+    document.addEventListener("touchstart", () => {
+        touches += 1;
+        document.querySelector("[data-start-text]").textContent = `Touched screen ${touches} times`;
+    });
+}

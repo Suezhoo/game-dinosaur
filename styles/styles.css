@@ -636,13 +636,11 @@ footer p {
     opacity: 0;
   }
   .toggler:checked ~ .leaderboard-image {
-    -webkit-transform: scale(1.125);
-            transform: scale(1.125);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
     border-color: #00da00;
     -webkit-box-shadow: 0px 0px 5px #00da00;
             box-shadow: 0px 0px 5px #00da00;
-  }
-  .toggler:checked ~ .leaderboard-image {
     content: url("../assets/img/leaderboard36x36-colored.png");
   }
   .toggler:checked ~ #mobile-start-text,
