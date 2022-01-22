@@ -30,12 +30,19 @@ export function initializeGame() {
 
 export function removeEventListener() {
     document.removeEventListener("keydown", initSpace);
+    document.removeEventListener("touchstart", mobileTouch);
 }
 
 function initSpace(e) {
+    console.log(e);
     if (e.code === "Space" && !game.isRunning) {
         game.startGame();
     } else if (e.code === "Space" && game.isRunning && game.dino.isAlive) {
+        game.dino.jump();
+    }
+    if (e.touches && !game.isRunning) {
+        game.startGame();
+    } else if (e.touches && game.isRunning && game.dino.isAlive) {
         game.dino.jump();
     }
 }
@@ -62,9 +69,9 @@ export function startInterval() {
 })();
 
 // Interval to check if user is on landscape and screen height lower than 480
+// If so, then stop the interval, and initialize touch listener
 if (screen.orientation.type == "portrait-primary") {
     const checkForMobile = setInterval(() => {
-        console.log("portrait");
         if (screen.orientation.type == "landscape-primary") {
             clearInterval(checkForMobile);
             onMobile();
@@ -74,19 +81,15 @@ if (screen.orientation.type == "portrait-primary") {
 
 function onMobile() {
     if (screen.orientation.type == "landscape-primary") {
-        console.log("On landscape");
         if (screen.orientation.type == "landscape-primary" && screen.height <= 480) {
-            let touches = 0;
-            document.addEventListener("touchstart", (e) => {
-                console.log(touches);
-                if (e.target == document.body || e.target.className == "game") {
-                    touches += 1;
-                    document.querySelector("[data-start-text]").textContent = `Touched screen ${touches} times`;
-                }
-            });
+            document.addEventListener("touchstart", mobileTouch);
         }
     }
 }
-// If so, then stop the interval, and initialize touch listener
 
+function mobileTouch(e) {
+    if (e.target == document.body || (e.target.className == "game" && !e.target.className == "leaderboard")) {
+        document.addEventListener("touchstart", initSpace);
+    }
+}
 // Block spacebar input when on mobile sizes

@@ -510,7 +510,8 @@ body > picture {
   height: 100px;
 }
 
-.hide {
+.hide,
+#hide {
   display: none;
 }
 
@@ -644,12 +645,16 @@ footer p {
     content: url("../assets/img/leaderboard36x36-colored.png");
   }
   .toggler:checked ~ #mobile-start-text,
-  .toggler:checked ~ .game {
+  .toggler:checked ~ .game,
+  .toggler:checked ~ .game-fullscreen {
     display: none;
   }
   .toggler:checked ~ .leaderboard {
     display: block;
     margin: 0;
+  }
+  .game-fullscreen {
+    border: transparent;
   }
 }
 /*# sourceMappingURL=styles.css.map */

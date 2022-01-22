@@ -17,7 +17,7 @@ export class Game {
         ];
         this.imageNumber = 0;
         this.dino = new Dinosaur();
-        this.backgroundSound = new Sound("assets/soundtrack/ome_robert.mp3");
+        this.backgroundSound;
     }
     playBackgroudSound() {
         // Adding background song
@@ -29,9 +29,12 @@ export class Game {
     }
     prepareGame() {
         // Play background sound
-        this.playBackgroudSound();
+        this.backgroundSound = new Sound("assets/soundtrack/ome_robert.mp3");
+        this.backgroundSound.replay();
         // Remove 'Press Space to play...'
         document.querySelector("[data-start-text]").classList.add("hide");
+        // Remove 'Tap screen to play...' for mobile
+        document.querySelector("[data-start-text-mobile]").setAttribute("id", "hide");
         // Game frame
         document.querySelector("[data-game]").classList.replace("game", "game-fullscreen");
         // Enlarge dino
@@ -271,6 +274,7 @@ export class Game {
         document.querySelector("[data-score]").classList.add("hide");
         document.querySelector("[data-high-score]").classList.add("hide");
         document.querySelector("[data-start-text").classList.remove("hide");
+        document.querySelector("[data-start-text-mobile]").classList.remove("hide");
         // Hide obstacles
         document.querySelector("[data-obstacles").classList.add("hide");
         // Reset space eventlistener
