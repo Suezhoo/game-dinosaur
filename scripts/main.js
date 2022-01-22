@@ -81,7 +81,7 @@ function onMobile() {
                 console.log(touches);
                 if (e.target == document.body || e.target.className == "game") {
                     touches += 1;
-                    document.querySelector("[data-start-text]").textContent = `Touched screen ${touches} times`;
+                    document.querySelector("[data-mobile-start-text]").textContent = `Touched screen ${touches} times`;
                 }
             });
         }
